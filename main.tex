@@ -1,0 +1,2992 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{ragged2e}
+\usepackage[hidelinks]{hyperref} 
+\usepackage{titlesec}
+\usepackage{amsmath}
+\documentclass{article}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+
+\tcbuselibrary{breakable}
+\usepackage[table]{xcolor}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry}
+\usepackage{float}
+% -------- Chapter / Section Formatting --------
+\titleformat{\chapter}[display]
+  {\centering\bfseries\Huge}
+  {\chaptername\ \thechapter}
+  {10pt}
+  {}
+\titlespacing*{\chapter}{0pt}{0pt}{20pt}
+\titleformat{\section}
+  {\bfseries\Large}
+  {\thesection}
+  {1em}
+  {}
+\titleformat{\subsection}
+  {\bfseries\normalsize}
+  {\thesubsection}
+  {1em}
+  {}
+\begin{document}
+\onehalfspacing
+\centering
+\vspace*{\fill}
+\pagenumbering{roman}   % Roman numerals (i, ii, iii, ...)
+\setcounter{page}{1}
+\vspace*{-4cm} % <-- eta control kore 1/3 position
+{\large \textit{ Assignment \\on}}\\
+
+{\large Course Code : STAT 4104}\\
+{\large Course Title : Categorical Data Analysis}\\
+
+\vspace{1.2cm}
+% University Logo
+\includegraphics[width=2.8cm]{image.png}\\
+\vspace{1cm}
+% Submitted By & Supervised By Table
+\begin{tabular}{|p{7cm}|p{7cm}|}
+    \hline
+    \textbf{Submitted By:} & \textbf{Submitted to :} \\ \hline
+    Sherin Sultana Surovi & Dr. Md. Siddikur Rahman \\ 
+    ID: 12010004 & Associate Professor \\ 
+    Reg: 000014414 & Department of Statistics \\ 
+    Session: 2020-21 & Begum Rokeya University, Rangpur \\ 
+    Department of Statistics & \\ 
+    Begum Rokeya University, Rangpur & \\ \hline
+\end{tabular}\\
+\vspace{1.5cm}
+% Footer
+{\large Department of Statistics}\\
+{\large Begum Rokeya University, Rangpur}\\
+\vspace*{\fill}
+MAY-2026
+\clearpage
+
+
+
+\clearpage
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries\centering} 
+{CHAPTER \thechapter}                 
+{1ex}                                 
+{\Huge}                              
+% ---------------- Section Formatting ----------------
+\titleformat{\section}
+  {\normalfont\Large\bfseries}          
+  {\thesection}{1em}{}
+% ---------------- Subsection Formatting ----------------
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}          
+  {\thesubsection}{1em}{}
+\onehalfspacing
+% ---------------- Front Matter Page Numbering ----------------
+\pagenumbering{roman}   % Roman numerals (i, ii, iii, ...)
+\setcounter{page}{2}    % Table of Contents starts at iv
+
+\tableofcontents
+\thispagestyle{plain}   % Force page number to show
+
+\clearpage
+\setcounter{page}{3}    % List of Figures starts at ix
+
+\listoffigures
+\thispagestyle{plain}   % Force page number to show
+
+\clearpage
+\listoftables
+\thispagestyle{plain}   % Will continue from x (10)
+
+\newpage
+\onehalfspacing
+\justifying
+% ---------------- Switch to Arabic for Main Chapters ----------------
+\clearpage
+\pagenumbering{arabic}  % Arabic numerals (1, 2, 3, ...)
+\setcounter{page}{1}    % Start from 1
+\chapter{Question No.1}
+\section{EDA}
+\begin{enumerate}
+\item Summarize the distribution of Age. Is it normally distributed or skewed?
+\item What proportion of individuals are smokers vs non-smokers?
+\item Which income group has the highest frequency?
+\item What percentage of individuals are exposed to high pollution?
+\item What is the overall prevalence of lung disease?
+\end{enumerate}
+\section*{Answer All the EDA Question}
+\begin{table}[htbp]
+\centering
+
+%-------------------- First Table --------------------%
+\begin{minipage}[t]{0.48\textwidth}
+\centering
+\caption{Sample Dataset}
+
+\vspace{0.3cm}
+
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+ID & Smoking & Age & Income & Pollution & LungDisease \\
+\hline
+1 & Yes & 36 & Low    & High & Yes \\
+2 & No  & 28 & Low    & Low  & No  \\
+3 & No  & 52 & Medium & High & No  \\
+4 & No  & 39 & High   & High & No  \\
+5 & Yes & 32 & Low    & Low  & Yes \\
+\hline
+\end{tabular}
+
+\end{minipage}
+\hfill
+
+%-------------------- Second Table --------------------%
+\begin{minipage}[t]{0.48\textwidth}
+\centering
+\caption{Data Information}
+
+\vspace{0.3cm}
+
+\begin{tabular}{|l|c|c|}
+\hline
+Column & Non-Null Count & Dtype \\
+\hline
+ID          & 500 & int64  \\
+Smoking     & 500 & object \\
+Age         & 500 & int64  \\
+Income      & 500 & object \\
+Pollution   & 500 & object \\
+LungDisease & 500 & object \\
+\hline
+\end{tabular}
+
+\end{minipage}
+
+\end{table}
+\clearpage
+
+\noindent
+\begin{minipage}{\textwidth}
+
+\centering
+\captionof{table}{Descriptive Statistics of Dataset Variables}
+
+\vspace{0.3cm}
+
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{6pt}
+
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+\textbf{Statistic} & \textbf{ID} & \textbf{Smoking} & \textbf{Age} & \textbf{Income} & \textbf{Pollution} & \textbf{LungDisease} \\
+\hline
+Count  & 500.000000 & 500 & 500.000000 & 500 & 500 & 500 \\
+\hline
+Unique & -- & 2 & -- & 3 & 2 & 2 \\
+\hline
+Top    & -- & No & -- & Low & High & Yes \\
+\hline
+Freq   & -- & 293 & -- & 204 & 352 & 264 \\
+\hline
+Mean   & 250.500000 & -- & 43.904000 & -- & -- & -- \\
+\hline
+Std    & 144.481833 & -- & 14.604841 & -- & -- & -- \\
+\hline
+Min    & 1.000000 & -- & 20.000000 & -- & -- & -- \\
+\hline
+25\%   & 125.750000 & -- & 30.750000 & -- & -- & -- \\
+\hline
+50\%   & 250.500000 & -- & 45.000000 & -- & -- & -- \\
+\hline
+75\%   & 375.250000 & -- & 56.000000 & -- & -- & -- \\
+\hline
+Max    & 500.000000 & -- & 69.000000 & -- & -- & -- \\
+\hline
+\end{tabular}
+
+\vspace{0.4cm}
+
+\textbf{Skewness of Age:} 0.012141455267137275
+
+\end{minipage}
+\begin{figure}[htbp]
+\centering
+\caption{Age Distribution showing approximately normal pattern.}
+\includegraphics[width=0.8\textwidth]{age distribution.png}
+
+\label{fig:age_distribution}
+\vspace{0.2cm}
+\textbf{Note:} Age is approximately normal.
+\end{figure}
+\clearpage
+\begin{table}[htbp]
+\centering
+\caption{Summary of EDA Results}
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{|l|l|l|}
+\hline
+\multicolumn{3}{|c|}{\textbf{Smoking Analysis}} \\ \hline
+\textbf{Category} & \textbf{Count} & \textbf{Percentage (\%)} \\ \hline
+No & 293 & 58.6 \\ \hline
+Yes & 207 & 41.4 \\ \hline
+\multicolumn{3}{|c|}{\textbf{Income Distribution}} \\ \hline
+\textbf{Group} & \textbf{Count} & \textbf{Highest Group} \\ \hline
+Low & 204 & \\ \cline{1-2}
+Medium & 197 &  \\ \cline{1-2}
+High & 99 &  \\ \hline
+\multicolumn{3}{|c|}{\textbf{Pollution Exposure}} \\ \hline
+\textbf{Level} & \textbf{Percentage (\%)} & \textbf{High Exposure (\%)} \\ \hline
+High & 70.4 & 70.4 \\ \hline
+Low & 29.6 & -- \\ \hline
+\multicolumn{3}{|c|}{\textbf{Lung Disease Prevalence}} \\ \hline
+\textbf{Condition} & \textbf{Percentage (\%)} & \textbf{Overall Prevalence (\%)} \\ \hline
+Yes & 52.8 & 52.8 \\ \hline
+No & 47.2 & -- \\ \hline
+\end{tabular}
+\end{table}
+\subsection{Basic EDA Interpretation}
+
+\textbf{{i) Distribution of Age}}
+
+The average age of the individuals in the dataset is 43.9 years with a standard deviation of 14.6 years. The minimum age is 20 years and the maximum age is 69 years. The skewness value of Age is 0.012, which is very close to zero, indicating that the age distribution is approximately normal and symmetric. Therefore, there is no strong evidence of skewness in the age variable.
+
+\vspace{0.3cm}
+
+\textbf{{ii) Proportion of Smokers vs Non-Smokers}}
+
+The dataset contains 293 non-smokers (58.6\%) and 207 smokers (41.4\%). This indicates that non-smokers form the majority of the study population. However, a substantial proportion of individuals are smokers, which may increase the risk of lung disease within the population.
+
+\vspace{0.3cm}
+\textbf{{iii) Income Group with the Highest Frequency}}
+
+Among the three income categories, the Low income group has the highest frequency with 204 individuals. The Medium income group contains 197 individuals, while the High income group contains only 99 individuals. This shows that most participants in the dataset belong to the low-income category.
+
+\vspace{0.3cm}
+\textbf{{iv) Percentage of Individuals Exposed to High Pollution}}
+
+The analysis shows that 70.4\% of individuals are exposed to high pollution levels, whereas only 29.6\% are exposed to low pollution levels. This indicates that the majority of the population in the dataset lives in highly polluted environments, which may contribute to respiratory and lung-related diseases.
+
+\vspace{0.3cm}
+
+\textbf{{v) Overall Prevalence of Lung Disease}}
+
+The prevalence analysis reveals that 52.8\% of individuals have lung disease, while 47.2\% do not have lung disease. This means that more than half of the study population is affected by lung disease, suggesting that lung disease is relatively common in this dataset.
+\section{Association and Crosstab }
+\subsection*{Association \& Crosstab}
+\begin{enumerate}
+\item Is there an association between Smoking and Lung Disease?
+\item Interpret using a contingency table.
+
+
+\vspace{0.3cm}
+
+\begin{table}[htbp]
+\centering
+\caption{Contingency Table and Chi-Square Test Results}
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{8pt}
+\begin{tabular}{|l|c|c|}
+\hline
+\multicolumn{3}{|c|}{\textbf{Contingency Table}} \\ \hline
+\textbf{Smoking} & \textbf{LungDisease: No} & \textbf{LungDisease: Yes} \\ \hline
+No & 184 & 109 \\ \hline
+Yes & 52 & 155 \\ \hline
+\multicolumn{3}{|c|}{\textbf{Chi-Square Test Results}} \\ \hline
+\textbf{Statistic} & \textbf{Value} & \textbf{Description} \\ \hline
+Chi-square Statistic & 67.5943 & Measure of association strength \\ \hline
+Degrees of Freedom & 1 & Number of independent comparisons \\ \hline
+P-value & 2.0085$\times10^{-16}$ & Probability of observing such result by chance \\ \hline
+\multicolumn{3}{|c|}{\textbf{Interpretation: There is a significant association between Smoking and Lung Disease.}} \\ \hline
+\end{tabular}
+\end{table}
+\end{enumerate}
+\section{Does Pollution Level Affect Lung Disease?}
+{i) Compare Lung Disease Prevalence Across Income Groups}
+
+{ii) Which Factor Appears to Have the Strongest Relationship with Lung Disease?}
+
+\clearpage
+
+\noindent
+\begin{minipage}{\textwidth}
+
+\centering
+
+\captionof{table}{Association: Pollution vs Lung Disease}
+
+\vspace{0.3cm}
+
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{8pt}
+
+\begin{tabular}{|l|c|c|}
+\hline
+\multicolumn{3}{|c|}{\textbf{Contingency Table}} \\ \hline
+\textbf{Pollution Level} & \textbf{LungDisease: No} & \textbf{LungDisease: Yes} \\ \hline
+High & 136 & 216 \\ \hline
+Low & 100 & 48 \\ \hline
+
+\multicolumn{3}{|c|}{\textbf{Chi-Square Test Results}} \\ \hline
+\textbf{Statistic} & \textbf{Value} & \textbf{Description} \\ \hline
+Chi-square Statistic & 33.8426 & Measure of association strength \\ \hline
+Degrees of Freedom & 1 & Number of independent comparisons \\ \hline
+P-value & $5.9757 \times 10^{-9}$ & Probability of observing such result by chance \\ \hline
+
+\multicolumn{3}{|c|}{\textbf{Interpretation: There is a significant association between Pollution level and Lung Disease.}} \\ \hline
+
+\end{tabular}
+
+\end{minipage}
+\section{Statistical Testing}
+
+{i) Perform a Chi-square Test for: Smoking vs Lung Disease and Pollution vs Lung Disease}
+
+{ii) When Should You Use Fisher’s Exact Test Instead of Chi-squared?}
+
+{iii) Calculate and Interpret the Odds Ratio for Smoking and Lung Disease}
+\section*{Answer All the Testical Question}
+{i)
+\begin{table}[htbp]
+\centering
+\caption{Chi-square Test: Smoking vs Lung Disease}
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{8pt}
+\begin{tabular}{|l|c|c|}
+\hline
+\multicolumn{3}{|c|}{\textbf{Contingency Table}} \\ \hline
+\textbf{Smoking} & \textbf{LungDisease: No} & \textbf{LungDisease: Yes} \\ \hline
+No & 184 & 109 \\ \hline
+Yes & 52 & 155 \\ \hline
+\multicolumn{3}{|c|}{\textbf{Chi-Square Test Results}} \\ \hline
+\textbf{Statistic} & \textbf{Value} & \textbf{Description} \\ \hline
+Chi-square Statistic & 67.5943 & Measure of association strength \\ \hline
+Degrees of Freedom & 1 & Number of independent comparisons \\ \hline
+P-value & 2.0085$\times10^{-16}$ & Probability of observing such result by chance \\ \hline
+\multicolumn{3}{|c|}{\textbf{Interpretation: There is a significant association between Smoking and Lung Disease.}} \\ \hline
+\end{tabular}
+\end{table}
+\clearpage
+{2,3)
+\begin{table}[htbp]
+\centering
+\caption{Chi-square Test, Fisher's Exact Test, and Odds Ratio Results}
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{8pt}
+\begin{tabular}{|l|c|c|}
+\hline
+\multicolumn{3}{|c|}{\textbf{Chi-square Test: Pollution vs Lung Disease}} \\ \hline
+\textbf{Pollution Level} & \textbf{LungDisease: No} & \textbf{LungDisease: Yes} \\ \hline
+High & 136 & 216 \\ \hline
+Low & 100 & 48 \\ \hline
+\multicolumn{3}{|c|}{\textbf{Chi-Square Test Results}} \\ \hline
+\textbf{Statistic} & \textbf{Value} & \textbf{Description} \\ \hline
+Chi-square Statistic & 33.8426 & Measure of association strength \\ \hline
+Degrees of Freedom & 1 & Number of independent comparisons \\ \hline
+P-value & 5.9757$\times10^{-9}$ & Probability of observing such result by chance \\ \hline
+\multicolumn{3}{|c|}{\textbf{Interpretation: There is a significant association between Pollution level and Lung Disease.}} \\ \hline
+\multicolumn{3}{|c|}{\textbf{Fisher's Exact Test}} \\ \hline
+\textbf{Statistic} & \textbf{Value} & \textbf{Description} \\ \hline
+Odds Ratio & 5.0318 & Strength of association between variables \\ \hline
+P-value & 5.1286$\times10^{-17}$ & Probability of observing such result by chance \\ \hline
+\multicolumn{3}{|l|}{\textbf{Fisher's Exact Test is generally used when:}} \\ \hline
+\multicolumn{3}{|l|}{-- Sample size is small} \\ \hline
+\multicolumn{3}{|l|}{-- Expected frequencies are less than 5} \\ \hline
+\multicolumn{3}{|l|}{-- The contingency table is 2x2} \\ \hline
+\multicolumn{3}{|c|}{\textbf{Odds Ratio: Smoking vs Lung Disease}} \\ \hline
+Odds Ratio & 5.0318 & Smokers have higher odds of developing lung disease \\ \hline
+\end{tabular}
+\end{table}
+\section{correlation and interpret}
+\clearpage
+\clearpage
+
+\noindent
+\begin{minipage}{\textwidth}
+\centering
+
+\captionof{table}{Correlation Results and Causality Explanation}
+
+\vspace{0.3cm}
+
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{8pt}
+
+\begin{tabular}{|l|c|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Correlation Results}} \\ \hline
+Smoking vs Lung Disease & 0.3717 \\ \hline
+Age vs Lung Disease & 0.2497 \\ \hline
+\multicolumn{2}{|l|}{\textbf{Interpretation:}} \\ \hline
+\multicolumn{2}{|l|}{Positive correlation: Smoking is associated with higher lung disease risk.} \\ \hline
+\multicolumn{2}{|l|}{Older age is associated with higher lung disease risk.} \\ \hline
+\multicolumn{2}{|c|}{\textbf{Causality Explanation}} \\ \hline
+\multicolumn{2}{|l|}{Correlation is not sufficient for causal inference because:} \\ \hline
+1. & It only measures association, not cause-effect relationship. \\ \hline
+2. & There may be confounding variables (e.g., pollution, lifestyle). \\ \hline
+3. & Direction of effect is unknown (A may influence B or vice versa). \\ \hline
+4. & Spurious correlations may exist due to random chance. \\ \hline
+5. & Proper causal inference requires controlled experiments or advanced models. \\ \hline
+\end{tabular}
+
+\end{minipage}
+\section{Logistic Regression}
+\begin{enumerate}
+\item Fit a logistic regression model: LungDisease $\sim$ Smoking + Age + Pollution + Income
+\item Which variables are statistically significant predictors?
+\item Interpret the odds ratio of Smoking.
+\item What happens to the effect of Smoking after adjusting for Pollution?
+\end{enumerate}
+\section*{Answer All the logistics Question}
+\begin{table}[htbp]
+\centering
+\caption{Logistic Regression Results for Lung Disease}
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{8pt}
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+\textbf{Variable} & \textbf{coef} & \textbf{std err} & \textbf{z} & \textbf{P$>|z|$} & \textbf{[0.025]} & \textbf{[0.975]} \\ \hline
+const & -2.1940 & 0.425 & -5.164 & 0.000 & -3.027 & -1.361 \\ \hline
+Smoking & 1.7022 & 0.218 & 7.801 & 0.000 & 1.275 & 2.130 \\ \hline
+Age & 0.0399 & 0.007 & 5.455 & 0.000 & 0.026 & 0.054 \\ \hline
+Income\_Low & 0.4396 & 0.285 & 1.544 & 0.123 & -0.119 & 0.998 \\ \hline
+Income\_Medium & 0.2201 & 0.285 & 0.773 & 0.440 & -0.338 & 0.779 \\ \hline
+Pollution\_Low & -1.3027 & 0.235 & -5.533 & 0.000 & -1.764 & -0.841 \\ \hline
+\end{tabular}
+\end{table}
+
+\noindent
+\textbf{Model Summary:} \\
+Dependent Variable: LungDisease \\
+No. of Observations: 500 \\
+Pseudo R-squared: 0.2005 \\
+Log-Likelihood: -276.47 \\
+LLR p-value: 3.499$\times10^{-28}$ \\
+
+\vspace{0.3cm}
+\textbf{Interpretation:}
+\begin{itemize}
+\item \textbf{Smoking} and \textbf{Age} are statistically significant predictors of lung disease (p $<$ 0.001). 
+\item \textbf{Pollution\_Low} has a significant negative coefficient, indicating lower pollution reduces lung disease risk.
+\item \textbf{Income\_Low} and \textbf{Income\_Medium} are not significant predictors (p $>$ 0.05).
+\item The positive coefficient for Smoking (1.7022) implies smokers have higher odds of developing lung disease.
+\item After adjusting for Pollution, the effect of Smoking remains strong and significant, suggesting an independent influence.
+\end{itemize}
+\section{modeling}
+\begin{table}[htbp]
+\centering
+\caption{Logistic Regression Results with Interaction Term (Smoking × Pollution)}
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{8pt}
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+\textbf{Variable} & \textbf{coef} & \textbf{std err} & \textbf{z} & \textbf{P$>|z|$} & \textbf{[0.025]} & \textbf{[0.975]} \\ \hline
+const & -2.1285 & 0.430 & -4.953 & 0.000 & -2.971 & -1.286 \\ \hline
+Smoking & 1.5778 & 0.257 & 6.130 & 0.000 & 1.073 & 2.082 \\ \hline
+Age & 0.0393 & 0.007 & 5.352 & 0.000 & 0.025 & 0.054 \\ \hline
+Smoking\_Pollution & 0.4217 & 0.483 & 0.874 & 0.382 & -0.524 & 1.367 \\ \hline
+Pollution\_Low & -1.4883 & 0.323 & -4.606 & 0.000 & -2.122 & -0.855 \\ \hline
+Income\_Low & 0.4465 & 0.285 & 1.567 & 0.117 & -0.112 & 1.005 \\ \hline
+Income\_Medium & 0.2214 & 0.285 & 0.777 & 0.437 & -0.337 & 0.780 \\ \hline
+\end{tabular}
+\end{table}
+
+\vspace{0.3cm}
+\noindent
+\textbf{Model Summary:} \\
+Dependent Variable: LungDisease \\
+No. of Observations: 500 \\
+Pseudo R-squared: 0.2016 \\
+Log-Likelihood: -276.09 \\
+LLR p-value: 1.341$\times10^{-27}$ \\
+
+\vspace{0.3cm}
+\textbf{Odds Ratios:}
+\begin{table}[htbp]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{8pt}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Variable} & \textbf{Odds Ratio} \\ \hline
+const & 0.1190 \\ \hline
+Smoking & 4.8445 \\ \hline
+Age & 1.0400 \\ \hline
+Smoking\_Pollution & 1.5245 \\ \hline
+Pollution\_Low & 0.2258 \\ \hline
+Income\_Low & 1.5629 \\ \hline
+Income\_Medium & 1.2478 \\ \hline
+\end{tabular}
+\end{table}
+
+\vspace{0.3cm}
+\textbf{Interpretation:}
+\begin{itemize}
+\item \textbf{Smoking}, \textbf{Age}, and \textbf{Pollution\_Low} are statistically significant predictors (p $<$ 0.001).
+\item The interaction term \textbf{Smoking × Pollution} is not significant (p = 0.382), indicating pollution does not amplify smoking risk significantly.
+\item The positive coefficient for Smoking (1.5778) implies smokers have higher odds of developing lung disease.
+\item The negative coefficient for Pollution\_Low (-1.4883) suggests lower pollution reduces lung disease risk.
+\item Odds ratio for Smoking (4.8445) means smokers are about 4.8 times more likely to develop lung disease compared to non-smokers.
+\end{itemize}
+\section{ Model Evaluation}
+\begin{table}[htbp]
+\centering
+\caption{Model Evaluation Results}
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{8pt}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value} \\ \hline
+AUC Score & 0.7882 \\ \hline
+\multicolumn{2}{|c|}{\textbf{Confusion Matrix}} \\ \hline
+\multicolumn{2}{|c|}{
+\begin{tabular}{cc}
+153 & 83 \\
+59 & 205 \\
+\end{tabular}
+} \\ \hline
+Accuracy & 0.716 \\ \hline
+Sensitivity & 0.7765 \\ \hline
+Specificity & 0.6483 \\ \hline
+\end{tabular}
+\end{table}
+
+\vspace{0.3cm}
+\noindent
+\textbf{Interpretation:}
+\begin{itemize}
+\item The model achieved an AUC score of 0.7882, indicating good discriminatory power.
+\item Accuracy of 71.6\% shows overall correct classification performance.
+\item Sensitivity (77.65\%) suggests the model effectively identifies positive cases (lung disease).
+\item Specificity (64.83\%) indicates moderate ability to correctly identify negative cases.
+\item Overall, the model performs reasonably well, with better sensitivity than specificity.
+\end{itemize}
+\clearpage
+\chapter{Question No.2}
+\textbf{{One Way Anova}}
+\begin{table}[htbp]
+\centering
+\caption{One-way ANOVA Results for Exercise Programs}
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{8pt}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Statistic} & \textbf{Value} \\ \hline
+F-statistic & 9.0202 \\ \hline
+p-value & 0.0002755 \\ \hline
+\end{tabular}
+\vspace{0.3cm}
+
+\begin{tabular}{|l|c|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Group Means (Weight Loss in Pounds)}} \\ \hline
+Program A & 4.9742 \\ \hline
+Program B & 5.9667 \\ \hline
+Program C & 4.8168 \\ \hline
+\end{tabular}
+\end{table}
+
+\vspace{0.3cm}
+\noindent
+\textbf{Conclusion:} There is a statistically significant difference in mean weight loss among the three exercise programs (p $<$ 0.001).  
+Program B shows the highest average weight loss, indicating it may be more effective compared to Programs A and C.
+\clearpage
+\chapter{Question No.3}
+
+
+\subsection*{Contingency Table:}
+\begin{table}[h!]
+\centering
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Anemia level} & \textbf{Mild} & \textbf{Moderate} & \textbf{Not anemic} & \textbf{Severe} \\
+\textbf{Age in 5-year groups} & & & & \\
+\midrule
+15-19 & 157 & 177 & 182 & 10 \\
+20-24 & 630 & 748 & 922 & 39 \\
+25-29 & 996 & 1094 & 1565 & 49 \\
+30-34 & 852 & 928 & 1196 & 70 \\
+35-39 & 636 & 667 & 916 & 40 \\
+40-44 & 230 & 271 & 383 & 10 \\
+45-49 & 93  & 89  & 173 & 13 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent
+$$\text{Chi-square Statistic} = 45.895$$
+$$\text{Degrees of Freedom} = 18$$
+$$\text{P-value} = 0.00031$$
+
+\subsection*{Reject H0}
+\noindent There is a significant association between age group and anemia level.
+
+
+\subsection*{Expected Frequencies:}
+
+\begin{table}[h!]
+\centering
+\caption{Expected Frequencies Table of Children's Anemia Levels by Maternal Age Groups}
+\label{tab:expected_frequencies}
+\vspace{1mm} % Small space between caption and table
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Anemia level} & \textbf{Mild} & \textbf{Moderate} & \textbf{Not anemic} & \textbf{Severe} \\
+\textbf{Age in 5-year groups} & & & & \\
+\midrule
+15-19 & 143.913216 & 159.129415 &  213.707521 &  9.249848 \\
+20-24 & 639.948691 & 707.611602 &  950.307780 & 41.131928 \\
+25-29 & 1013.411693 & 1120.561510 & 1504.890987 & 65.135810 \\
+30-34 & 833.383374 & 921.498477 & 1237.553441 & 53.564708 \\
+35-39 & 618.060749 & 683.409409 &  917.804735 & 39.725107 \\
+40-44 & 244.597747 & 270.459501 &  363.221529 & 15.721224 \\
+45-49 & 100.684531 & 111.330085 &  149.514007 &  6.471376 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection*{Chi-square Test Results}
+\noindent\rule{\textwidth}{0.4pt}
+
+\begin{align*}
+\text{Chi-square} & : 45.8950569178203 \\
+\text{p-value} & : 0.00030731153928803393 \\
+\text{df} & : 18
+\end{align*}
+
+\noindent \textbf{Conclusion:} Significant association exists.
+
+
+\subsection*{Chi-square Contribution Analysis}
+
+Below is the Chi-square Contribution Heatmap illustrating the relationship between maternal age groups and children's anemia levels.
+
+\begin{figure}[h]
+ \caption{Chi-square Contribution Heatmap showing association between maternal age groups and anemia levels in children}
+    \label{fig:chi_square_heatmap}
+    \centering
+    \includegraphics[width=0.9\textwidth]{chi_square_contribution.png}
+   
+\end{figure}
+\clearpage
+\chapter{Question No.4}
+
+\subsection*{Contingency Table}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\toprule
+\textbf{Drug} & \textbf{No Disease} & \textbf{Disease} \\
+\midrule
+Drug A & 40 & 10 \\
+Drug B & 10 & 40 \\
+Drug C & 25 & 25 \\
+\bottomrule
+\end{tabular}
+\caption{Contingency table of disease status across different drugs}
+\end{table}
+
+\subsection{Post-hoc Fisher Exact Test Results}
+
+\textbf{Comparison: Drug A vs Drug B}
+\begin{itemize}
+    \item Odds Ratio: 16.0
+    \item Raw p-value: 0.0
+    \item Adjusted p-value: 0.0
+    \item Result: Significant Difference
+\end{itemize}
+
+\textbf{Comparison: Drug A vs Drug C}
+\begin{itemize}
+    \item Odds Ratio: 4.0
+    \item Raw p-value: 0.00305
+    \item Adjusted p-value: 0.00916
+    \item Result: Significant Difference
+\end{itemize}
+
+\textbf{Comparison: Drug B vs Drug C}
+\begin{itemize}
+    \item Odds Ratio: 0.25
+    \item Raw p-value: 0.00305
+    \item Adjusted p-value: 0.00916
+    \item Result: Significant Difference
+\end{itemize}
+\clearpage
+\chapter{Question No.5}
+\subsection*{Data description:}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lrrrr}
+\toprule
+ & \textbf{admit} & \textbf{gre} & \textbf{gpa} & \textbf{rank} \\
+\midrule
+count & 400.000000 & 400.000000 & 400.000000 & 400.000000 \\
+mean  &   0.317500 & 587.700000 &   3.389900 &   2.485000 \\
+std   &   0.466087 & 115.516536 &   0.380567 &   0.944446 \\
+min   &   0.000000 & 220.000000 &   2.260000 &   1.000000 \\
+25\%   &   0.000000 & 520.000000 &   3.130000 &   2.000000 \\
+50\%   &   0.000000 & 580.000000 &   3.395000 &   2.000000 \\
+75\%   &   1.000000 & 660.000000 &   3.670000 &   3.000000 \\
+max   &   1.000000 & 800.000000 &   4.000000 &   4.000000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Logistic Regression Model Summary:}
+
+\begin{center}
+\textbf{Generalized Linear Model Regression Results}
+\end{center}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lclc}
+\midrule
+\textbf{Dep. Variable:}   & admit          & \textbf{No. Observations:} & 400      \\
+\textbf{Model:}           & GLM            & \textbf{Df Residuals:}     & 394      \\
+\textbf{Model Family:}    & Binomial       & \textbf{Df Model:}         & 5        \\
+\textbf{Link Function:}   & Logit          & \textbf{Scale:}            & 1.0000   \\
+\textbf{Method:}          & IRLS           & \textbf{Log-Likelihood:}   & -229.26  \\
+\textbf{Date:}            & Sat, 16 May 2026 & \textbf{Deviance:}         & 458.52   \\
+\textbf{Time:}            & 11:18:09       & \textbf{Pearson chi2:}     & 397.     \\
+\textbf{No. Iterations:}  & 4              & \textbf{Pseudo R-squ. (CS):}& 0.09846 \\
+\textbf{Covariance Type:} & nonrobust      &                            &          \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lrrrrrr}
+\toprule
+ & \textbf{coef} & \textbf{std err} & \textbf{z} & \textbf{P$> |$z$|$} & \textbf{[0.025} & \textbf{0.975]} \\
+\midrule
+Intercept & -3.9900 & 1.140 & -3.500 & 0.000 & -6.224 & -1.756 \\
+rank[T.2] & -0.6754 & 0.316 & -2.134 & 0.033 & -1.296 & -0.055 \\
+rank[T.3] & -1.3402 & 0.345 & -3.881 & 0.000 & -2.017 & -0.663 \\
+rank[T.4] & -1.5515 & 0.418 & -3.713 & 0.000 & -2.370 & -0.733 \\
+gre       &  0.0023 & 0.001 &  2.070 & 0.038 &  0.000 &  0.004 \\
+gpa       &  0.8040 & 0.332 &  2.423 & 0.015 &  0.154 &  1.454 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{document}
+
+\section*{Effect of Admission into Graduate School Using GLM}
+
+A Generalized Linear Model (GLM) with binomial family (logit link) was fitted to examine the effect of GRE score, GPA, and university ranking on the probability of admission into graduate school.
+
+\section*{1. Overall Model Interpretation}
+
+The fitted GLM model is statistically significant and indicates that the predictors jointly explain variation in graduate school admission.
+
+The pseudo $R^2$ value suggests that the model has moderate explanatory power. This implies that admission decisions are influenced by academic performance and institutional ranking, rather than being random.
+
+\textbf{Conclusion:} The model is appropriate for explaining admission probability.
+
+\section*{2. Effect of GRE Score}
+
+The GRE score has a positive and statistically significant effect on admission probability (p $<$ 0.05).
+
+This indicates that students with higher GRE scores are more likely to be admitted. However, the magnitude of the effect is relatively small.
+
+\textbf{Interpretation:} GRE has a weak but positive influence on admission.
+
+\section*{3. Effect of GPA}
+
+GPA shows a positive and statistically significant relationship with admission probability.
+
+This suggests that students with higher academic performance (GPA) have a significantly higher chance of being admitted.
+
+\textbf{Interpretation:} GPA is a strong predictor of graduate school admission.
+
+\section*{4. Effect of University Rank}
+
+All university rank categories (Rank 2, Rank 3, Rank 4) have negative and statistically significant coefficients compared to Rank 1.
+
+This implies that students from lower-ranked universities are less likely to be admitted.
+
+\textbf{Interpretation:}
+University ranking is a strong negative predictor of admission probability.
+
+\section*{5. Intercept Interpretation}
+
+The negative intercept indicates that the baseline probability of admission is low when all predictors are at their reference or zero values.
+
+\section*{Final Conclusion}
+
+Graduate school admission is significantly influenced by:
+
+\begin{itemize}
+    \item GPA (strong positive effect)
+    \item GRE score (weak positive effect)
+    \item University ranking (strong negative effect)
+\end{itemize}
+
+Overall, GPA and university ranking are the most important determinants of admission, while GRE contributes a smaller but significant effect.
+\clearpage
+\chapter{Question No.6}
+\section*{Summary Statistics:}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lrrrr}
+\toprule
+ & \textbf{id} & \textbf{num\_awards} & \textbf{prog} & \textbf{math} \\
+\midrule
+count & 200.000000 & 200.000000 & 200.000000 & 200.000000 \\
+mean  & 100.500000 &   0.630000 &   2.025000 &  52.645000 \\
+std   &  57.879185 &   1.052921 &   0.690477 &   9.368448 \\
+min   &   1.000000 &   0.000000 &   1.000000 &  33.000000 \\
+25\%   &  50.750000 &   0.000000 &   2.000000 &  45.000000 \\
+50\%   & 100.500000 &   0.000000 &   2.000000 &  52.000000 \\
+75\%   & 150.250000 &   1.000000 &   2.250000 &  59.000000 \\
+max   & 200.000000 &   6.000000 &   3.000000 &  75.000000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section*{POISSON REGRESSION SUMMARY}
+
+\begin{center}
+\textbf{Generalized Linear Model Regression Results}
+\end{center}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lclc}
+\midrule
+\textbf{Dep. Variable:}   & num\_awards     & \textbf{No. Observations:} & 200      \\
+\textbf{Model:}           & GLM             & \textbf{Df Residuals:}     & 196      \\
+\textbf{Model Family:}    & Poisson         & \textbf{Df Model:}         & 3        \\
+\textbf{Link Function:}   & Log             & \textbf{Scale:}            & 1.0000   \\
+\textbf{Method:}          & IRLS            & \textbf{Log-Likelihood:}   & -182.75  \\
+\textbf{Date:}            & Sat, 16 May 2026 & \textbf{Deviance:}         & 189.45   \\
+\textbf{Time:}            & 11:17:04        & \textbf{Pearson chi2:}     & 212.     \\
+\textbf{No. Iterations:}  & 5               & \textbf{Pseudo R-squ. (CS):}& 0.3881  \\
+\textbf{Covariance Type:} & nonrobust       &                            &          \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lrrrrrr}
+\toprule
+ & \textbf{coef} & \textbf{std err} & \textbf{z} & \textbf{P$> |$z$|$} & \textbf{[0.025} & \textbf{0.975]} \\
+\midrule
+Intercept  & -5.2471 & 0.658 & -7.969 & 0.000 & -6.538 & -3.957 \\
+prog[T.2]  &  1.0839 & 0.358 &  3.025 & 0.002 &  0.382 &  1.786 \\
+prog[T.3]  &  0.3698 & 0.441 &  0.838 & 0.402 & -0.495 &  1.234 \\
+math       &  0.0702 & 0.011 &  6.619 & 0.000 &  0.049 &  0.091 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\subsection*{INCIDENCE RATE RATIOS (IRR)}
+\begin{align*}
+\text{Intercept} & : 0.005263 \\
+\text{prog[T.2]} & : 2.956065 \\
+\text{prog[T.3]} & : 1.447458 \\
+\text{math}      & : 1.072672 \\
+\text{dtype}     & : \text{float64}
+\end{align*}
+
+\subsection*{PREDICTED NUMBER OF AWARDS}
+\begin{table}[h!]
+\centering
+\begin{tabular}{crr}
+\toprule
+ & \textbf{num\_awards} & \textbf{Predicted\_Count} \\
+\midrule
+0 & 0 & 0.135191 \\
+1 & 0 & 0.093399 \\
+2 & 0 & 0.166858 \\
+3 & 0 & 0.145016 \\
+4 & 0 & 0.126032 \\
+5 & 0 & 0.100186 \\
+6 & 0 & 0.191991 \\
+7 & 0 & 0.126032 \\
+8 & 0 & 0.077128 \\
+9 & 0 & 0.191991 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{INTERPRETATION}
+\begin{itemize}
+    \item $\text{Intercept} \rightarrow \text{p-value} = 0.0000 \rightarrow \text{Statistically Significant}$
+    \item $\text{prog[T.2]} \rightarrow \text{p-value} = 0.0025 \rightarrow \text{Statistically Significant}$
+    \item $\text{prog[T.3]} \rightarrow \text{p-value} = 0.4018 \rightarrow \text{Not Significant}$
+    \item $\text{math} \rightarrow \text{p-value} = 0.0000 \rightarrow \text{Statistically Significant}$
+\end{itemize}
+
+\subsubsection*{Conclusion:}
+\begin{enumerate}
+    \item Math score has a positive effect on the number of awards earned.
+    \item Students in different academic programs earn different numbers of awards.
+    \item Significant predictors ($p < 0.05$) strongly influence award counts.
+    \item $\text{IRR} > 1$ indicates increased expected award counts.
+    \item $\text{IRR} < 1$ indicates decreased expected award counts.
+\end{enumerate}
+\clearpage
+\chapter{Question No.7}
+\begin{document}
+
+\subsection*{Summary Statistics:}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lrrrr}
+\toprule
+ & \textbf{id} & \textbf{math} & \textbf{daysabs} & \textbf{prog} \\
+\midrule
+count &  314.000000 & 314.000000 & 314.000000 & 314.000000 \\
+mean  & 1575.910889 &  48.267517 &   5.955414 &   2.213376 \\
+std   &  502.314789 &  25.362385 &   7.036952 &   0.651132 \\
+min   & 1001.000000 &   1.000000 &   0.000000 &   1.000000 \\
+25\%   & 1079.250000 &  28.000000 &   1.000000 &   2.000000 \\
+50\%   & 1158.500000 &  48.000000 &   4.000000 &   2.000000 \\
+75\%   & 2077.750000 &  70.000000 &   8.000000 &   3.000000 \\
+max   & 2157.000000 &  99.000000 &  35.000000 &   3.000000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{NEGATIVE BINOMIAL MODEL SUMMARY}
+
+\begin{center}
+\textbf{Generalized Linear Model Regression Results}
+\end{center}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lclc}
+\midrule
+\textbf{Dep. Variable:}   & daysabs          & \textbf{No. Observations:} & 314      \\
+\textbf{Model:}           & GLM              & \textbf{Df Residuals:}     & 310      \\
+\textbf{Model Family:}    & NegativeBinomial & \textbf{Df Model:}         & 3        \\
+\textbf{Link Function:}   & Log              & \textbf{Scale:}            & 1.0000   \\
+\textbf{Method:}          & IRLS             & \textbf{Log-Likelihood:}   & -865.68  \\
+\textbf{Date:}            & Sat, 16 May 2026 & \textbf{Deviance:}         & 350.98   \\
+\textbf{Time:}            & 11:16:20         & \textbf{Pearson chi2:}     & 331.     \\
+\textbf{No. Iterations:}  & 6                & \textbf{Pseudo R-squ. (CS):}& 0.1926  \\
+\textbf{Covariance Type:} & nonrobust        &                            &          \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lrrrrrr}
+\toprule
+ & \textbf{coef} & \textbf{std err} & \textbf{z} & \textbf{P$> |$z$|$} & \textbf{[0.025} & \textbf{0.975]} \\
+\midrule
+Intercept   &  2.6150 & 0.200 &  13.054 & 0.000 &  2.222 &  3.008 \\
+prog[T.2.0] & -0.4408 & 0.185 &  -2.379 & 0.017 & -0.804 & -0.078 \\
+prog[T.3.0] & -1.2786 & 0.203 &  -6.284 & 0.000 & -1.677 & -0.880 \\
+math        & -0.0060 & 0.003 &  -2.358 & 0.018 & -0.011 & -0.001 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\subsection*{INCIDENCE RATE RATIOS (IRR)}
+\begin{align*}
+\text{Intercept} & : 13.667374 \\
+\text{prog[T.2.0]} & : 0.643551 \\
+\text{prog[T.3.0]} & : 0.278418 \\
+\text{math}      & : 0.994030 \\
+\text{dtype}     & : \text{float64}
+\end{align*}
+
+\subsection*{PREDICTED DAYS OF ABSENCE}
+\begin{table}[h!]
+\centering
+\begin{tabular}{crr}
+\toprule
+ & \textbf{daysabs} & \textbf{Predicted\_Absence} \\
+\midrule
+0 &  4.0 & 6.031800 \\
+1 &  4.0 & 7.482714 \\
+2 &  2.0 & 7.802998 \\
+3 &  3.0 & 7.992136 \\
+4 &  3.0 & 8.690957 \\
+5 & 13.0 & 5.749687 \\
+6 & 11.0 & 6.031800 \\
+7 &  7.0 & 8.639075 \\
+8 & 10.0 & 6.481134 \\
+9 &  9.0 & 2.837692 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{INTERPRETATION}
+\begin{itemize}
+    \item $\text{Intercept} \rightarrow \text{p-value} = 0.0000 \rightarrow \text{Statistically Significant}$
+    \item $\text{prog[T.2.0]} \rightarrow \text{p-value} = 0.0174 \rightarrow \text{Statistically Significant}$
+    \item $\text{prog[T.3.0]} \rightarrow \text{p-value} = 0.0000 \rightarrow \text{Statistically Significant}$
+    \item $\text{math} \rightarrow \text{p-value} = 0.0184 \rightarrow \text{Statistically Significant}$
+\end{itemize}
+
+\subsubsection*{Conclusion:}
+\begin{enumerate}
+    \item Math score significantly affects student absenteeism.
+    \item Different academic programs are associated with different absence rates.
+    \item Significant predictors ($p < 0.05$) strongly influence the number of absent days.
+    \item $\text{IRR} > 1$ means increased absence rate.
+    \item $\text{IRR} < 1$ means decreased absence rate.
+    \item Negative Binomial Regression is appropriate because count data.
+\end{enumerate}
+\clearpage
+\chapter{Question No.8}
+\begin{document}
+
+\subsection*{Zero-Inflated Poisson Regression Results}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lclc}
+\hline
+\textbf{Dep. Variable:}   & count              & \textbf{No. Observations:} & 250        \\
+\textbf{Model:}           & ZeroInflatedPoisson & \textbf{Df Residuals:}     & 245        \\
+\textbf{Method:}          & MLE                & \textbf{Df Model:}         & 4          \\
+\textbf{Date:}            & Sat, 16 May 2026   & \textbf{Pseudo R-squ.:}    & 0.3679     \\
+\textbf{Time:}            & 11:15:42           & \textbf{Log-Likelihood:}   & -712.41    \\
+\textbf{converged:}       & True               & \textbf{LL-Null:}          & -1127.0    \\
+\textbf{Covariance Type:} & nonrobust          & \textbf{LLR p-value:}      & $3.589 \times 10^{-178}$ \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lrrrrrr}
+\toprule
+ & \textbf{coef} & \textbf{std err} & \textbf{z} & \textbf{P$> |$z$|$} & \textbf{[0.025} & \textbf{0.975]} \\
+\midrule
+inflate\_const    &  0.8334 & 1.207 &  0.691 & 0.490 & -1.532 &  3.198 \\
+inflate\_persons  & -0.9312 & 0.210 & -4.441 & 0.000 & -1.342 & -0.520 \\
+inflate\_child    &  1.9586 & 0.344 &  5.699 & 0.000 &  1.285 &  2.632 \\
+inflate\_camper   & -0.8717 & 0.370 & -2.357 & 0.018 & -1.597 & -0.147 \\
+inflate\_livebait &  0.7412 & 1.120 &  0.662 & 0.508 & -1.453 &  2.936 \\
+const             & -2.4521 & 0.275 & -8.924 & 0.000 & -2.991 & -1.914 \\
+persons           &  0.8364 & 0.042 & 19.803 & 0.000 &  0.754 &  0.919 \\
+child             & -1.1806 & 0.091 & -12.968 & 0.000 & -1.359 & -1.002 \\
+camper            &  0.5971 & 0.092 &  6.461 & 0.000 &  0.416 &  0.778 \\
+livebait          &  1.8189 & 0.241 &  7.541 & 0.000 &  1.346 &  2.292 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\section*{Zero-Inflated Poisson Regression: Factors Affecting Number of Awards}
+
+A Zero-Inflated Poisson (ZIP) regression model was fitted to identify the factors associated with the number of awards earned by students in a high school. The model accounts for excess zeros and over-dispersion in the count data.
+
+\section*{1. Overall Model Fit}
+
+The model shows a strong statistical fit:
+
+\begin{itemize}
+    \item The log-likelihood value is high in magnitude, indicating good model performance.
+    \item The likelihood ratio test is highly significant ($p < 0.001$), confirming that the predictors jointly explain variation in the number of awards.
+    \item The pseudo $R^2$ value (0.3679) suggests a moderate-to-strong explanatory power.
+\end{itemize}
+
+\textbf{Conclusion:} The model fits the data well and is statistically significant.
+
+\section*{2. Count Model Interpretation (Number of Awards)}
+
+The count component explains how predictors affect the number of awards directly.
+
+\subsection*{Significant Positive Effects}
+
+\begin{itemize}
+    \item \textbf{Persons (coef = 0.8364, p < 0.001):}  
+    Students with more persons (support/participation variable) tend to earn significantly more awards.
+
+    \item \textbf{Camper (coef = 0.5971, p < 0.001):}  
+    Participation as a camper increases the expected number of awards.
+
+    \item \textbf{Livebait (coef = 1.8189, p < 0.001):}  
+    Students involved in livebait activities have a strong positive effect on awards earned.
+\end{itemize}
+
+\subsection*{Significant Negative Effects}
+
+\begin{itemize}
+    \item \textbf{Child (coef = -1.1806, p < 0.001):}  
+    Having more children is associated with a lower number of awards.
+\end{itemize}
+
+\section*{3. Zero-Inflation Model Interpretation}
+
+The inflation part explains excess zeros (students with zero awards).
+
+\begin{itemize}
+    \item \textbf{Child (positive and significant):} increases probability of being in the zero-award group.
+    \item \textbf{Persons and Camper (negative coefficients):} reduce the probability of being a structural zero, meaning they help students move away from zero awards.
+\end{itemize}
+
+\section*{4. Key Findings}
+
+\begin{itemize}
+    \item The most influential positive predictor of awards is \textbf{Livebait participation}.
+    \item \textbf{Camper status} and \textbf{Persons variable} also significantly increase award counts.
+    \item \textbf{Child variable} reduces award counts and increases the chance of zero awards.
+\end{itemize}
+
+\section*{Final Conclusion}
+
+The number of awards earned by students is significantly influenced by participation-related variables. Students engaged in structured activities such as camping and livebait programs tend to earn more awards, while the presence of competing responsibilities (e.g., child-related factor) reduces academic achievement in terms of awards.
+\clearpage
+\chapter{Question No.9}
+\begin{document}
+
+\subsection*{Generalized Linear Model Regression Results}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lclc}
+\hline
+\textbf{Dep. Variable:}   & fish\_caught      & \textbf{No. Observations:} & 250        \\
+\textbf{Model:}           & GLM               & \textbf{Df Residuals:}     & 245        \\
+\textbf{Model Family:}    & Binomial          & \textbf{Df Model:}         & 4          \\
+\textbf{Link Function:}   & Logit             & \textbf{Scale:}            & 1.0000     \\
+\textbf{Method:}          & IRLS              & \textbf{Log-Likelihood:}   & -123.83    \\
+\textbf{Date:}            & Sat, 16 May 2026  & \textbf{Deviance:}         & 247.67     \\
+\textbf{Time:}            & 19:25:22          & \textbf{Pearson chi2:}     & 231.       \\
+\textbf{No. Iterations:}  & 5                 & \textbf{Pseudo R-squ. (CS):}& 0.3141    \\
+\textbf{Covariance Type:} & nonrobust          &                            &            \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lrrrrrr}
+\toprule
+ & \textbf{coef} & \textbf{std err} & \textbf{z} & \textbf{P$> |$z$|$} & \textbf{[0.025} & \textbf{0.975]} \\
+\midrule
+const    & -3.1728 & 0.648 & -4.895 & 0.000 & -4.444 & -1.902 \\
+persons  &  1.1529 & 0.197 &  5.851 & 0.000 &  0.767 &  1.539 \\
+child    & -2.2203 & 0.323 & -6.871 & 0.000 & -2.854 & -1.587 \\
+camper   &  0.9530 & 0.327 &  2.910 & 0.004 &  0.311 &  1.595 \\
+livebait &  0.9768 & 0.487 &  2.006 & 0.045 &  0.023 &  1.931 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{INTERPRETATION}
+\begin{align*}
+\text{const}    & : -3.1728 \\
+\text{persons}  & : 1.1529 \\
+\text{child}    & : -2.2203 \\
+\text{camper}   & : 0.9530 \\
+\text{livebait} & : 0.9768
+\end{align*}
+
+\subsubsection*{Conclusion:}
+\begin{itemize}
+    \item Probability of catching fish increases with persons, camper, and livebait.
+    \item Child has a negative effect on fishing success.
+\end{itemize}
+\subsection*{Generalized Linear Model Regression Results}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lclc}
+\hline
+\textbf{Dep. Variable:}   & fish\_caught      & \textbf{No. Observations:} & 250        \\
+\textbf{Model:}           & GLM               & \textbf{Df Residuals:}     & 245        \\
+\textbf{Model Family:}    & Binomial          & \textbf{Df Model:}         & 4          \\
+\textbf{Link Function:}   & Logit             & \textbf{Scale:}            & 1.0000     \\
+\textbf{Method:}          & IRLS              & \textbf{Log-Likelihood:}   & -123.83    \\
+\textbf{Date:}            & Sat, 16 May 2026  & \textbf{Deviance:}         & 247.67     \\
+\textbf{Time:}            & 19:25:22          & \textbf{Pearson chi2:}     & 231.       \\
+\textbf{No. Iterations:}  & 5                 & \textbf{Pseudo R-squ. (CS):}& 0.3141    \\
+\textbf{Covariance Type:} & nonrobust          &                            &            \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lrrrrrr}
+\toprule
+ & \textbf{coef} & \textbf{std err} & \textbf{z} & \textbf{P$> |$z$|$} & \textbf{[0.025} & \textbf{0.975]} \\
+\midrule
+const    & -3.1728 & 0.648 & -4.895 & 0.000 & -4.444 & -1.902 \\
+persons  &  1.1529 & 0.197 &  5.851 & 0.000 &  0.767 &  1.539 \\
+child    & -2.2203 & 0.323 & -6.871 & 0.000 & -2.854 & -1.587 \\
+camper   &  0.9530 & 0.327 &  2.910 & 0.004 &  0.311 &  1.595 \\
+livebait &  0.9768 & 0.487 &  2.006 & 0.045 &  0.023 &  1.931 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Model Interpretation}
+
+\begin{enumerate}
+    \item The model indicates that an increase in the number of people (\textit{persons}) in the group significantly increases the likelihood or success rate of catching fish.
+    \item The presence of a \textit{child} in the group has a significant negative impact on fishing success, noticeably decreasing the probability of catching fish.
+    \item Both being a \textit{camper} and utilizing \textit{livebait} act as statistically significant positive predictors, substantially boosting the chances of a successful catch.
+    \item Based on the coefficients, the presence of children carries the strongest overall effect in the model but in a negative direction (coef: -2.2203), presenting a primary obstacle to fishing success.
+    \item Overall, larger group sizes, choosing to camp, and employing live bait serve as highly effective factors for maximizing the probability of catching fish.
+\end{enumerate}
+\clearpage
+\chapter{Question No.10}
+\begin{document}
+
+\subsection*{Zero-Truncated Negative Binomial Regression Results}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lrr}
+\toprule
+\textbf{Variable / Parameter} & \textbf{Coefficient (coef)} & \textbf{Incidence Rate Ratio (IRR)} \\
+\midrule
+Intercept (const) &  1.02185188 & 2.77833516 \\
+Variable 1        & -0.00229098 & 0.99771164 \\
+Variable 2        & -0.01695145 & 0.98319141 \\
+Variable 3        & -0.03037454 & 0.97008213 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\subsection*{Model Interpretation and Estimation Analysis}
+
+\begin{enumerate}
+    \item \textbf{Analysis of Coefficients ($\beta$)}
+    
+    The coefficients indicate the directional relationship between the independent variables and the expected log count of the dependent variable:
+    \begin{itemize}
+        \item \textbf{Intercept ($1.0219$):} The baseline log count when all independent variables are held at zero.
+        \item \textbf{Variables 1, 2, and 3 ($-0.0023$, $-0.0169$, and $-0.0304$):} All three independent variables display negative coefficients. This systematically indicates that as any of these variable values increase, the expected count of the dependent variable (e.g., days spent in the hospital) decreases.
+    \end{itemize}
+
+    \item \textbf{Analysis of Incidence Rate Ratios (IRR)}
+    
+    The Incidence Rate Ratio is calculated by exponentiating the coefficient ($e^{\beta}$). It tells us the multiplicative effect of a one-unit change in a predictor variable on the expected rate or count:
+    \begin{itemize}
+        \item \textbf{Intercept ($\text{IRR} = 2.7783$):} Represents the expected baseline count of the event when all predictors are zero.
+        \item \textbf{Variable 1 ($\text{IRR} = 0.9977$):} A one-unit increase in Variable 1 is associated with a $0.23\%$ decrease in the expected count ($1 - 0.9977 = 0.0023$), holding all other variables constant. This effect is extremely minimal.
+        \item \textbf{Variable 2 ($\text{IRR} = 0.9832$):} A one-unit increase in Variable 2 results in a $1.68\%$ decrease in the expected count ($1 - 0.9832 = 0.0168$).
+        \item \textbf{Variable 3 ($\text{IRR} = 0.9701$):} A one-unit increase in Variable 3 results in a $2.99\%$ decrease in the expected count ($1 - 0.9701 = 0.0299$). Variable 3 shows the strongest reductive impact among the predictors.
+    \end{itemize}
+\end{enumerate}
+\clearpage
+\chapter{Question NO.11}
+\begin{document}
+
+\subsection*{Zero-Truncated Poisson Regression Results}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lrr}
+\toprule
+\textbf{Variable / Parameter} & \textbf{Coefficient (coef)} & \textbf{Incidence Rate Ratio (IRR)} \\
+\midrule
+Intercept (const) &  0.44748491 & 1.56437270 \\
+Variable 1        &  0.01218667 & 1.01226126 \\
+Variable 2        & -0.30134211 & 0.73982462 \\
+Variable 3        &  0.71647022 & 2.04719430 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\subsection*{Statistical Model Estimation and Interpretation}
+
+\begin{enumerate}
+    \item \textbf{Analysis of Coefficients ($\beta$)}
+    
+    The regression coefficients quantify the expected change in the log-transformed count profile of the dependent outcome per unit shift across your set of predictors:
+    \begin{itemize}
+        \item \textbf{Intercept ($0.4475$):} This represents the expected baseline log count benchmark context when all concurrent explanatory factors rest at zero.
+        \item \textbf{Variable 1 ($0.0122$):} Possesses a slight positive coefficient directional signal, meaning an upward change in this indicator subtly correlates with an escalation in the final counted score.
+        \item \textbf{Variable 2 ($-0.3013$):} Carries a distinct negative coefficient value. This isolates a clear inverse configuration; higher input steps on Variable 2 translate directly to an expected contraction of the primary counter value.
+        \item \textbf{Variable 3 ($0.7165$):} Holds a prominent positive coefficient magnitude, marking it out as a principal systematic driver that significantly increases the calculated volume metric under study.
+    \end{itemize}
+
+    \item \textbf{Analysis of Incidence Rate Ratios (IRR)}
+    
+    The Incidence Rate Ratio metrics are obtained via exponentiation ($e^{\beta}$) to reflect a cleaner, direct multiplicative percentage modification vector relative to rate/count structures:
+    \begin{itemize}
+        \item \textbf{Intercept ($\text{IRR} = 1.5644$):} Evaluates the operational starting rate coefficient index baseline.
+        \item \textbf{Variable 1 ($\text{IRR} = 1.0123$):} A singular step forward along this dimension corresponds with a minor $1.23\%$ incremental increase ($1.0123 - 1 = 0.0123$) across the expected accumulation scale.
+        \item \textbf{Variable 2 ($\text{IRR} = 0.7398$):} A single-unit addition yields a pronounced $26.02\%$ net reduction ($1 - 0.7398 = 0.2602$) over total calculated observation cycles, identifying its core role as an inhibiting variable.
+        \item \textbf{Variable 3 ($\text{IRR} = 2.0472$):} A one-unit structural advancement here pushes a major shift, effectively expanding the anticipated overall frequency occurrence rate by $104.72\%$ (over doubling the original baseline expectations).
+    \end{itemize}
+\end{enumerate}
+\clearpage
+\chapter{Python Code}
+```latex
+\section{Code for Question 2}
+
+\begin{tcolorbox}[
+colback=blue!5!white,
+colframe=blue!75!black,
+title=Python Code for One-Way ANOVA Analysis,
+fonttitle=\bfseries,
+breakable,
+enhanced,
+arc=4mm,
+boxrule=1mm
+]
+
+\scriptsize
+
+\begin{lstlisting}[language=Python,
+backgroundcolor=\color{gray!10},
+basicstyle=\ttfamily\scriptsize,
+keywordstyle=\color{blue}\bfseries,
+commentstyle=\color{green!50!black},
+stringstyle=\color{red},
+numbers=left,
+numberstyle=\tiny\color{gray},
+stepnumber=1,
+breaklines=true,
+frame=single,
+tabsize=4,
+showstringspaces=false
+]
+
+import pandas as pd
+import numpy as np
+from scipy import stats
+import statsmodels.api as sm
+from statsmodels.formula.api import ols
+from statsmodels.stats.multicomp import pairwise_tukeyhsd
+
+# -----------------------------
+# Example dataset
+# -----------------------------
+np.random.seed(42)
+
+# Simulated weight loss data (in pounds)
+program_A = np.random.normal(
+    loc=5.2,
+    scale=1.1,
+    size=30
+)
+
+program_B = np.random.normal(
+    loc=6.8,
+    scale=1.3,
+    size=30
+)
+
+program_C = np.random.normal(
+    loc=4.9,
+    scale=1.0,
+    size=30
+)
+
+# Combine into a DataFrame
+df = pd.DataFrame({
+    'weight_loss': np.concatenate([
+        program_A,
+        program_B,
+        program_C
+    ]),
+    'program': ['A']*30 + ['B']*30 + ['C']*30
+})
+
+# -----------------------------
+# Step 1: One-way ANOVA
+# -----------------------------
+model = ols(
+    'weight_loss ~ C(program)',
+    data=df
+).fit()
+
+anova_table = sm.stats.anova_lm(
+    model,
+    typ=2
+)
+
+print("ANOVA Table:\n")
+print(anova_table)
+
+# -----------------------------
+# Step 2: Assumption Checks
+# -----------------------------
+
+# Shapiro-Wilk Test
+print("\nShapiro-Wilk Test:")
+
+for prog in ['A', 'B', 'C']:
+
+    stat, p = stats.shapiro(
+        df[df['program'] == prog]['weight_loss']
+    )
+
+    print(
+        f"Program {prog}: "
+        f"W={stat:.3f}, "
+        f"p={p:.3f}"
+    )
+
+# Levene’s Test
+levene_stat, levene_p = stats.levene(
+    program_A,
+    program_B,
+    program_C
+)
+
+print("\nLevene’s Test:")
+print(
+    f"Statistic={levene_stat:.3f}, "
+    f"p={levene_p:.3f}"
+)
+
+# -----------------------------
+# Step 3: Tukey HSD Test
+# -----------------------------
+tukey = pairwise_tukeyhsd(
+    endog=df['weight_loss'],
+    groups=df['program'],
+    alpha=0.05
+)
+
+print("\nTukey HSD Results:\n")
+print(tukey)
+
+\end{lstlisting}
+
+\end{tcolorbox}
+
+\section{Code for Question 3}
+
+\begin{tcolorbox}[
+colback=cyan!5!white,
+colframe=cyan!70!black,
+title=Python Code for Chi-Square Test Analysis,
+fonttitle=\bfseries,
+breakable,
+enhanced,
+arc=4mm,
+boxrule=1mm
+]
+
+\scriptsize
+
+\begin{lstlisting}[language=Python,
+backgroundcolor=\color{gray!10},
+basicstyle=\ttfamily\scriptsize,
+keywordstyle=\color{blue}\bfseries,
+commentstyle=\color{green!50!black},
+stringstyle=\color{red},
+numbers=left,
+numberstyle=\tiny\color{gray},
+stepnumber=1,
+breaklines=true,
+frame=single,
+tabsize=4,
+showstringspaces=false
+]
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+from scipy.stats import chi2_contingency
+import os
+
+# =========================
+# Output Folder
+# =========================
+save_path = (
+    r"C:\Users\ayash\OneDrive"
+    r"\Desktop\problem3\output"
+)
+
+os.makedirs(save_path, exist_ok=True)
+
+# =========================
+# Load Dataset
+# =========================
+df = pd.read_csv(
+    r"C:\Users\ayash\OneDrive"
+    r"\Desktop\problem3"
+    r"\children anemia.csv"
+)
+
+# =========================
+# Contingency Table
+# =========================
+table = pd.crosstab(
+    df['Age in 5-year groups'],
+    df['Anemia level']
+)
+
+print("\nContingency Table:\n")
+print(table)
+
+# =========================
+# Chi-square Test
+# =========================
+chi2, p, dof, expected = chi2_contingency(table)
+
+print("\nChi-square Results")
+print("-------------------")
+
+print(f"Chi-square = {chi2:.4f}")
+print(f"p-value    = {p:.4f}")
+print(f"Degrees of Freedom = {dof}")
+
+# =========================
+# Save Table to CSV
+# =========================
+table.to_csv(
+    save_path + r"\contingency_table.csv"
+)
+
+# Expected Frequencies
+expected_df = pd.DataFrame(
+    expected,
+    index=table.index,
+    columns=table.columns
+)
+
+expected_df.to_csv(
+    save_path + r"\expected_frequencies.csv"
+)
+
+# =========================
+# Contribution Calculation
+# =========================
+contribution = (
+    (table - expected) ** 2
+) / expected
+
+# =========================
+# Heatmap Visualization
+# =========================
+plt.figure(figsize=(10,6))
+
+sns.heatmap(
+    contribution,
+    annot=True,
+    cmap="coolwarm",
+    fmt=".2f"
+)
+
+plt.title(
+    "Chi-square Contribution Heatmap",
+    fontsize=14
+)
+
+plt.xlabel("Anemia Level")
+plt.ylabel("Age Group")
+
+# Save Figure
+plt.savefig(
+    save_path + r"\chi_square_contribution.png",
+    dpi=300,
+    bbox_inches="tight"
+)
+
+plt.show()
+
+# =========================
+# Save Results
+# =========================
+with open(
+    save_path + r"\results.txt",
+    "w"
+) as f:
+
+    f.write("Chi-square Test Results\n")
+    f.write("------------------------\n")
+
+    f.write(f"Chi-square: {chi2}\n")
+    f.write(f"p-value: {p}\n")
+    f.write(f"df: {dof}\n\n")
+
+    if p < 0.05:
+        f.write(
+            "Conclusion: Significant "
+            "association exists.\n"
+        )
+    else:
+        f.write(
+            "Conclusion: No significant "
+            "association.\n"
+        )
+
+print("\nAll outputs saved in:")
+print(save_path)
+
+\end{lstlisting}
+
+\end{tcolorbox}
+\section{Code for Question 4}
+
+\begin{tcolorbox}[
+colback=white,
+colframe=black,
+title=Python Code for Fisher Exact Post-hoc Analysis,
+fonttitle=\bfseries,
+breakable,
+enhanced,
+boxrule=0.8mm
+]
+
+\scriptsize
+
+\begin{lstlisting}[language=Python,
+basicstyle=\ttfamily\scriptsize,
+keywordstyle=\color{blue}\bfseries,
+commentstyle=\color{green!40!black},
+stringstyle=\color{red},
+numbers=left,
+numberstyle=\tiny,
+breaklines=true,
+frame=single,
+showstringspaces=false
+]
+
+import pandas as pd
+import numpy as np
+
+from scipy.stats import fisher_exact
+
+from statsmodels.stats.multitest import (
+    multipletests
+)
+
+from itertools import combinations
+
+# =====================================================
+# Create Contingency Table
+# =====================================================
+
+data = np.array([
+    [40, 10],   # Drug A
+    [10, 40],   # Drug B
+    [25, 25]    # Drug C
+])
+
+df = pd.DataFrame(
+    data,
+    index=[
+        'Drug A',
+        'Drug B',
+        'Drug C'
+    ],
+    columns=[
+        'No Disease',
+        'Disease'
+    ]
+)
+
+print("Contingency Table:\n")
+print(df)
+
+# =====================================================
+# Pairwise Post-hoc Fisher Tests
+# =====================================================
+
+pairs = list(
+    combinations(df.index, 2)
+)
+
+p_values = []
+
+results = []
+
+for pair in pairs:
+
+    sub_table = df.loc[
+        list(pair)
+    ]
+
+    oddsratio, p = fisher_exact(
+        sub_table
+    )
+
+    p_values.append(p)
+
+    results.append([
+        pair[0],
+        pair[1],
+        round(oddsratio, 3),
+        p
+    ])
+
+# =====================================================
+# Bonferroni Correction
+# =====================================================
+
+adjusted = multipletests(
+    p_values,
+    method='bonferroni'
+)
+
+# =====================================================
+# Display Results
+# =====================================================
+
+print(
+    "\nPost-hoc Fisher Exact "
+    "Test Results:\n"
+)
+
+for i, res in enumerate(results):
+
+    print(
+        "Comparison :",
+        res[0],
+        "vs",
+        res[1]
+    )
+
+    print(
+        "Odds Ratio :",
+        res[2]
+    )
+
+    print(
+        "Raw p-value :",
+        round(res[3], 5)
+    )
+
+    print(
+        "Adjusted p-value :",
+        round(adjusted[1][i], 5)
+    )
+
+    if adjusted[1][i] < 0.05:
+
+        print(
+            "Result : "
+            "Significant Difference\n"
+        )
+
+    else:
+
+        print(
+            "Result : "
+            "No Significant Difference\n"
+        )
+
+\end{lstlisting}
+
+\end{tcolorbox}
+```latex id="g5k9ta"
+\section{Code for Question 5}
+
+\begin{tcolorbox}[
+colback=green!5!white,
+colframe=green!60!black,
+title=Python Code for Logistic Regression using GLM,
+fonttitle=\bfseries,
+breakable,
+enhanced,
+arc=3mm,
+boxrule=0.8mm
+]
+
+\scriptsize
+
+\begin{lstlisting}[language=Python,
+backgroundcolor=\color{gray!10},
+basicstyle=\ttfamily\scriptsize,
+keywordstyle=\color{blue}\bfseries,
+commentstyle=\color{green!40!black},
+stringstyle=\color{red},
+numbers=left,
+numberstyle=\tiny\color{gray},
+breaklines=true,
+frame=single,
+showstringspaces=false
+]
+
+# =====================================================
+# Step 1: Import Required Libraries
+# =====================================================
+
+import pandas as pd
+
+import statsmodels.api as sm
+
+import statsmodels.formula.api as smf
+
+
+# =====================================================
+# Step 2: Load Dataset
+# =====================================================
+
+url = (
+    "https://stats.idre.ucla.edu/"
+    "stat/data/binary.csv"
+)
+
+df = pd.read_csv(url)
+
+
+# =====================================================
+# Step 3: Preview Dataset
+# =====================================================
+
+print(
+    "First 5 Rows of Dataset:\n"
+)
+
+print(df.head())
+
+print(
+    "\nDataset Description:\n"
+)
+
+print(df.describe())
+
+
+# =====================================================
+# Step 4: Convert Rank to Categorical
+# =====================================================
+
+df['rank'] = df['rank'].astype(
+    'category'
+)
+
+
+# =====================================================
+# Step 5: Fit Logistic Regression Model
+# =====================================================
+
+model = smf.glm(
+
+    formula=
+    'admit ~ gre + gpa + rank',
+
+    data=df,
+
+    family=sm.families.Binomial()
+
+).fit()
+
+
+# =====================================================
+# Step 6: Model Summary
+# =====================================================
+
+print(
+    "\nLogistic Regression "
+    "Model Summary:\n"
+)
+
+print(model.summary())
+
+\end{lstlisting}
+
+\end{tcolorbox}
+\section{Code for Question 6}
+
+\begin{tcolorbox}[
+colback=orange!5!white,
+colframe=orange!80!black,
+title=Python Code for Poisson Regression (GLM),
+fonttitle=\bfseries,
+breakable,
+enhanced,
+arc=3mm,
+boxrule=0.8mm
+]
+
+\scriptsize
+
+\begin{lstlisting}[language=Python,
+backgroundcolor=\color{gray!10},
+basicstyle=\ttfamily\scriptsize,
+keywordstyle=\color{blue}\bfseries,
+commentstyle=\color{green!40!black},
+stringstyle=\color{red},
+numbers=left,
+numberstyle=\tiny\color{gray},
+breaklines=true,
+frame=single,
+showstringspaces=false
+]
+
+# =========================================================
+# Poisson Regression (GLM)
+# Number of Awards Earned by Students
+# =========================================================
+
+# =========================================================
+# Step 1: Import Required Libraries
+# =========================================================
+
+import pandas as pd
+import numpy as np
+
+import statsmodels.api as sm
+
+import statsmodels.formula.api as smf
+
+
+# =========================================================
+# Step 2: Load Dataset
+# =========================================================
+
+url = (
+    "https://stats.idre.ucla.edu/"
+    "stat/data/poisson_sim.csv"
+)
+
+df = pd.read_csv(url)
+
+
+# =========================================================
+# Step 3: Dataset Information
+# =========================================================
+
+print("\nFirst 5 Rows:\n")
+
+print(df.head())
+
+print("\nDataset Information:\n")
+
+print(df.info())
+
+print("\nSummary Statistics:\n")
+
+print(df.describe())
+
+
+# =========================================================
+# Step 4: Convert Variable to Category
+# =========================================================
+
+df["prog"] = df["prog"].astype(
+    "category"
+)
+
+
+# =========================================================
+# Step 5: Fit Poisson Regression Model
+# =========================================================
+
+model = smf.glm(
+
+    formula=
+    "num_awards ~ math + prog",
+
+    data=df,
+
+    family=sm.families.Poisson()
+
+).fit()
+
+
+# =========================================================
+# Step 6: Model Summary
+# =========================================================
+
+print(
+    "\n=============== "
+    "POISSON REGRESSION SUMMARY "
+    "===============\n"
+)
+
+print(model.summary())
+
+
+# =========================================================
+# Step 7: Incidence Rate Ratios (IRR)
+# =========================================================
+
+irr = np.exp(model.params)
+
+print(
+    "\n=============== "
+    "INCIDENCE RATE RATIOS (IRR) "
+    "===============\n"
+)
+
+print(irr)
+
+
+# =========================================================
+# Step 8: Predicted Counts
+# =========================================================
+
+df["Predicted_Count"] = model.predict(df)
+
+print(
+    "\n=============== "
+    "PREDICTED NUMBER OF AWARDS "
+    "===============\n"
+)
+
+print(
+    df[
+        [
+            "num_awards",
+            "Predicted_Count"
+        ]
+    ].head(10)
+)
+
+
+# =========================================================
+# Step 9: Interpretation
+# =========================================================
+
+print(
+    "\n=============== "
+    "INTERPRETATION "
+    "===============\n"
+)
+
+for variable, pvalue in model.pvalues.items():
+
+    if pvalue < 0.05:
+
+        significance = (
+            "Statistically Significant"
+        )
+
+    else:
+
+        significance = (
+            "Not Significant"
+        )
+
+    print(
+        f"{variable} "
+        f"--> p-value = "
+        f"{pvalue:.4f} "
+        f"--> {significance}"
+    )
+
+
+print("\nConclusion:")
+
+print("""
+
+1. Math score has a positive
+   effect on the number of
+   awards earned.
+
+2. Students in different
+   academic programs earn
+   different numbers of awards.
+
+3. Significant predictors
+   (p < 0.05) strongly
+   influence award counts.
+
+4. IRR > 1 indicates increased
+   expected award counts.
+
+5. IRR < 1 indicates decreased
+   expected award counts.
+
+""")
+
+\end{lstlisting}
+
+\end{tcolorbox}
+\section{Code for Question 7}
+
+\begin{tcolorbox}[
+colback=purple!5!white,
+colframe=purple!75!black,
+title=Python Code for Negative Binomial Regression,
+fonttitle=\bfseries,
+breakable,
+enhanced,
+arc=3mm,
+boxrule=0.8mm
+]
+
+\scriptsize
+
+\begin{lstlisting}[language=Python,
+backgroundcolor=\color{gray!10},
+basicstyle=\ttfamily\scriptsize,
+keywordstyle=\color{blue}\bfseries,
+commentstyle=\color{green!40!black},
+stringstyle=\color{red},
+numbers=left,
+numberstyle=\tiny\color{gray},
+breaklines=true,
+frame=single,
+showstringspaces=false
+]
+
+# =========================================================
+# Negative Binomial Regression (GLM)
+# High School Student Absenteeism Dataset
+# =========================================================
+
+# =========================================================
+# Step 1: Import Libraries
+# =========================================================
+
+import pandas as pd
+import numpy as np
+
+import statsmodels.api as sm
+
+import statsmodels.formula.api as smf
+
+
+# =========================================================
+# Step 2: Load Dataset
+# =========================================================
+
+url = (
+    "https://stats.idre.ucla.edu/"
+    "stat/stata/dae/nb_data.dta"
+)
+
+df = pd.read_stata(url)
+
+
+# =========================================================
+# Step 3: Preview Dataset
+# =========================================================
+
+print("\nFirst 5 Rows:\n")
+
+print(df.head())
+
+print("\nDataset Information:\n")
+
+print(df.info())
+
+print("\nSummary Statistics:\n")
+
+print(df.describe())
+
+
+# =========================================================
+# Step 4: Convert Variable to Category
+# =========================================================
+
+df["prog"] = df["prog"].astype(
+    "category"
+)
+
+
+# =========================================================
+# Step 5: Fit Negative Binomial Model
+# =========================================================
+
+model = smf.glm(
+
+    formula=
+    "daysabs ~ math + prog",
+
+    data=df,
+
+    family=sm.families.NegativeBinomial()
+
+).fit()
+
+
+# =========================================================
+# Step 6: Model Summary
+# =========================================================
+
+print(
+    "\n=============== "
+    "NEGATIVE BINOMIAL "
+    "MODEL SUMMARY "
+    "===============\n"
+)
+
+print(model.summary())
+
+
+# =========================================================
+# Step 7: Incidence Rate Ratios (IRR)
+# =========================================================
+
+irr = np.exp(model.params)
+
+print(
+    "\n=============== "
+    "INCIDENCE RATE RATIOS (IRR) "
+    "===============\n"
+)
+
+print(irr)
+
+
+# =========================================================
+# Step 8: Predicted Absence Counts
+# =========================================================
+
+df["Predicted_Absence"] = model.predict(df)
+
+print(
+    "\n=============== "
+    "PREDICTED DAYS OF ABSENCE "
+    "===============\n"
+)
+
+print(
+    df[
+        [
+            "daysabs",
+            "Predicted_Absence"
+        ]
+    ].head(10)
+)
+
+
+# =========================================================
+# Step 9: Interpretation
+# =========================================================
+
+print(
+    "\n=============== "
+    "INTERPRETATION "
+    "===============\n"
+)
+
+for variable, pvalue in model.pvalues.items():
+
+    if pvalue < 0.05:
+
+        significance = (
+            "Statistically Significant"
+        )
+
+    else:
+
+        significance = (
+            "Not Significant"
+        )
+
+    print(
+        f"{variable} "
+        f"--> p-value = "
+        f"{pvalue:.4f} "
+        f"--> {significance}"
+    )
+
+
+print("\nConclusion:")
+
+print("""
+
+1. Math score significantly
+   affects student absenteeism.
+
+2. Different academic programs
+   are associated with different
+   absence rates.
+
+3. Significant predictors
+   (p < 0.05) strongly influence
+   the number of absent days.
+
+4. IRR > 1 means increased
+   absence rate.
+
+5. IRR < 1 means decreased
+   absence rate.
+
+6. Negative Binomial Regression
+   is appropriate because count
+   data often show over-dispersion
+   (variance > mean).
+
+""")
+
+\end{lstlisting}
+
+\end{tcolorbox}
+\section{Code for Question 8}
+
+\begin{tcolorbox}[
+colback=red!5!white,
+colframe=red!70!black,
+title=Python Code for Zero-Inflated Poisson (ZIP) Regression,
+fonttitle=\bfseries,
+breakable,
+enhanced,
+arc=3mm,
+boxrule=0.8mm
+]
+
+\scriptsize
+
+\begin{lstlisting}[language=Python,
+backgroundcolor=\color{gray!10},
+basicstyle=\ttfamily\scriptsize,
+keywordstyle=\color{blue}\bfseries,
+commentstyle=\color{green!40!black},
+stringstyle=\color{red},
+numbers=left,
+numberstyle=\tiny\color{gray},
+breaklines=true,
+frame=single,
+showstringspaces=false
+]
+
+# =========================================================
+# Zero-Inflated Poisson (ZIP) Regression
+# Fish Catch Dataset
+# =========================================================
+
+# =========================================================
+# Step 1: Import Libraries
+# =========================================================
+
+import pandas as pd
+
+import statsmodels.api as sm
+
+from statsmodels.discrete.count_model import (
+    ZeroInflatedPoisson
+)
+
+
+# =========================================================
+# Step 2: Load Dataset
+# =========================================================
+
+url = (
+    "https://stats.idre.ucla.edu/"
+    "stat/data/fish.csv"
+)
+
+df = pd.read_csv(url)
+
+
+# =========================================================
+# Step 3: Check Dataset Columns
+# =========================================================
+
+print("\nDataset Columns:\n")
+
+print(df.columns)
+
+
+# =========================================================
+# Step 4: Define Response Variable
+# =========================================================
+
+y = df["count"]
+
+
+# =========================================================
+# Step 5: Define Predictor Variables
+# =========================================================
+
+X = df[
+    [
+        "persons",
+        "child",
+        "camper",
+        "livebait"
+    ]
+]
+
+X = sm.add_constant(X)
+
+
+# =========================================================
+# Step 6: Inflation Model
+# =========================================================
+
+X_infl = X
+
+
+# =========================================================
+# Step 7: Fit ZIP Regression Model
+# =========================================================
+
+zip_model = ZeroInflatedPoisson(
+
+    endog=y,
+
+    exog=X,
+
+    exog_infl=X_infl,
+
+    inflation="logit"
+
+)
+
+
+result = zip_model.fit(
+
+    method="bfgs",
+
+    maxiter=200
+
+)
+
+
+# =========================================================
+# Step 8: Model Summary
+# =========================================================
+
+print(
+    "\n=============== "
+    "ZERO-INFLATED POISSON "
+    "MODEL SUMMARY "
+    "===============\n"
+)
+
+print(result.summary())
+
+\end{lstlisting}
+
+\end{tcolorbox}
+\section{Code for Question 9}
+
+\begin{tcolorbox}[
+colback=teal!5!white,
+colframe=teal!70!black,
+title=Python Code for Zero-Inflated Poisson Model,
+fonttitle=\bfseries,
+breakable,
+enhanced,
+arc=3mm,
+boxrule=0.8mm
+]
+
+\scriptsize
+
+\begin{lstlisting}[language=Python,
+backgroundcolor=\color{gray!10},
+basicstyle=\ttfamily\scriptsize,
+keywordstyle=\color{blue}\bfseries,
+commentstyle=\color{green!40!black},
+stringstyle=\color{red},
+numbers=left,
+numberstyle=\tiny\color{gray},
+breaklines=true,
+frame=single,
+showstringspaces=false
+]
+
+# =========================================================
+# Zero-Inflated Poisson (ZIP) Regression
+# Fish Catch Dataset
+# =========================================================
+
+# =========================================================
+# Step 1: Import Libraries
+# =========================================================
+
+import pandas as pd
+
+import statsmodels.api as sm
+
+from statsmodels.discrete.count_model import (
+    ZeroInflatedPoisson
+)
+
+
+# =========================================================
+# Step 2: Load Dataset
+# =========================================================
+
+url = (
+    "https://stats.idre.ucla.edu/"
+    "stat/data/fish.csv"
+)
+
+df = pd.read_csv(url)
+
+
+# =========================================================
+# Step 3: Define Response Variable
+# =========================================================
+
+y = df["count"]
+
+
+# =========================================================
+# Step 4: Define Predictor Variables
+# =========================================================
+
+X = df[
+    [
+        "persons",
+        "child",
+        "camper",
+        "livebait"
+    ]
+]
+
+X = sm.add_constant(X)
+
+
+# =========================================================
+# Step 5: Fit ZIP Regression Model
+# =========================================================
+
+model = ZeroInflatedPoisson(
+
+    endog=y,
+
+    exog=X,
+
+    exog_infl=X,
+
+    inflation='logit'
+
+)
+
+
+result = model.fit(
+
+    method="bfgs",
+
+    maxiter=200
+
+)
+
+
+# =========================================================
+# Step 6: Display Model Summary
+# =========================================================
+
+print(
+    "\n=============== "
+    "ZERO-INFLATED POISSON "
+    "MODEL SUMMARY "
+    "===============\n"
+)
+
+print(result.summary())
+
+\end{lstlisting}
+
+\end{tcolorbox}
+\section{Code for Question 10}
+
+\begin{tcolorbox}[
+colback=yellow!5!white,
+colframe=yellow!60!black,
+title=Python Code for Zero-Truncated Poisson (ZTP) Regression,
+fonttitle=\bfseries,
+breakable,
+enhanced,
+arc=3mm,
+boxrule=0.8mm
+]
+
+\scriptsize
+
+\begin{lstlisting}[language=Python,
+backgroundcolor=\color{gray!10},
+basicstyle=\ttfamily\scriptsize,
+keywordstyle=\color{blue}\bfseries,
+commentstyle=\color{green!40!black},
+stringstyle=\color{red},
+numbers=left,
+numberstyle=\tiny\color{gray},
+breaklines=true,
+frame=single,
+showstringspaces=false
+]
+
+# =========================================================
+# Zero-Truncated Poisson (ZTP) Regression
+# Synthetic Healthcare Dataset
+# =========================================================
+
+# =========================================================
+# Step 1: Import Required Libraries
+# =========================================================
+
+import numpy as np
+
+import pandas as pd
+
+import statsmodels.api as sm
+
+from scipy.optimize import minimize
+
+from scipy.special import gammaln
+
+
+# =========================================================
+# Step 2: Create Synthetic Dataset
+# =========================================================
+
+np.random.seed(123)
+
+n = 300
+
+age = np.random.randint(
+    20,
+    80,
+    n
+)
+
+insurance = np.random.choice(
+    [0, 1, 2],
+    n
+)
+
+death = np.random.choice(
+    [0, 1],
+    n
+)
+
+
+# =========================================================
+# Step 3: Design Matrix
+# =========================================================
+
+X = np.column_stack([
+    age,
+    insurance,
+    death
+])
+
+X = sm.add_constant(X)
+
+
+# =========================================================
+# Step 4: True Coefficients
+# =========================================================
+
+beta_true = np.array([
+    0.2,
+    0.01,
+    -0.15,
+    0.5
+])
+
+
+# =========================================================
+# Step 5: Generate Poisson Mean
+# =========================================================
+
+mu = np.exp(
+    X @ beta_true
+)
+
+
+# =========================================================
+# Step 6: Generate Poisson Counts
+# =========================================================
+
+y = np.random.poisson(mu)
+
+
+# =========================================================
+# Step 7: Remove Zero Counts
+# =========================================================
+
+y = y[y > 0]
+
+X = X[:len(y)]
+
+
+# =========================================================
+# Step 8: Define ZTP Log-Likelihood
+# =========================================================
+
+def ztp_loglike(
+    params,
+    y,
+    X
+):
+
+    eta = X @ params
+
+    mu = np.exp(eta)
+
+    loglik = (
+        y * np.log(mu)
+        - mu
+        - gammaln(y + 1)
+    )
+
+    loglik -= np.log(
+        1 - np.exp(-mu)
+    )
+
+    return -np.sum(loglik)
+
+
+# =========================================================
+# Step 9: Optimization
+# =========================================================
+
+init = np.zeros(
+    X.shape[1]
+)
+
+res = minimize(
+
+    ztp_loglike,
+
+    init,
+
+    args=(y, X),
+
+    method="BFGS"
+
+)
+
+
+# =========================================================
+# Step 10: Display Results
+# =========================================================
+
+print("\nCoefficients:\n")
+
+print(res.x)
+
+
+# =========================================================
+# Step 11: Incidence Rate Ratios (IRR)
+# =========================================================
+
+print(
+    "\nIncidence Rate Ratios (IRR):\n"
+)
+
+print(
+    np.exp(res.x)
+)
+
+\end{lstlisting}
+
+\end{tcolorbox}
+\section{Code for Question 11}
+
+\begin{tcolorbox}[
+colback=lime!5!white,
+colframe=lime!70!black,
+title=Python Code for Zero-Truncated Negative Binomial Regression,
+fonttitle=\bfseries,
+breakable,
+enhanced,
+arc=3mm,
+boxrule=0.8mm
+]
+
+\scriptsize
+
+\begin{lstlisting}[language=Python,
+backgroundcolor=\color{gray!10},
+basicstyle=\ttfamily\scriptsize,
+keywordstyle=\color{blue}\bfseries,
+commentstyle=\color{green!40!black},
+stringstyle=\color{red},
+numbers=left,
+numberstyle=\tiny\color{gray},
+breaklines=true,
+frame=single,
+showstringspaces=false
+]
+
+# =========================================================
+# Zero-Truncated Negative Binomial (ZTNB) Regression
+# Simulated Hospital Dataset
+# =========================================================
+
+# =========================================================
+# Step 1: Import Required Libraries
+# =========================================================
+
+import numpy as np
+
+import pandas as pd
+
+import statsmodels.api as sm
+
+from scipy.optimize import minimize
+
+from scipy.special import gammaln
+
+
+# =========================================================
+# Step 2: Simulate Hospital Dataset
+# =========================================================
+
+np.random.seed(42)
+
+n = 400
+
+
+age = np.random.randint(
+    18,
+    90,
+    n
+)
+
+insurance = np.random.choice(
+    [0, 1, 2],
+    n
+)
+
+death = np.random.choice(
+    [0, 1],
+    n
+)
+
+
+# =========================================================
+# Step 3: Create Design Matrix
+# =========================================================
+
+X = np.column_stack([
+    age,
+    insurance,
+    death
+])
+
+X = sm.add_constant(X)
+
+
+# =========================================================
+# Step 4: Define True Parameters
+# =========================================================
+
+beta = np.array([
+    0.3,
+    0.015,
+    -0.25,
+    0.8
+])
+
+
+# =========================================================
+# Step 5: Generate Mean Counts
+# =========================================================
+
+mu = np.exp(
+    X @ beta
+)
+
+
+# =========================================================
+# Step 6: Generate Negative Binomial Counts
+# =========================================================
+
+y = np.random.negative_binomial(
+
+    1,
+
+    1 / (1 + mu)
+
+)
+
+
+# =========================================================
+# Step 7: Zero Truncation
+# =========================================================
+
+mask = y > 0
+
+y = y[mask]
+
+X = X[mask]
+
+
+# =========================================================
+# Step 8: Define ZTNB Log-Likelihood
+# =========================================================
+
+def ztnb_loglike(
+    params,
+    y,
+    X,
+    alpha=1.0
+):
+
+    eta = X @ params
+
+    mu = np.exp(eta)
+
+    loglik = (
+
+        gammaln(y + 1/alpha)
+
+        - gammaln(y + 1)
+
+        - gammaln(1/alpha)
+
+        + y * np.log(mu)
+
+        - (y + 1/alpha)
+        * np.log(1 + alpha * mu)
+
+    )
+
+    p0 = (
+        1 + alpha * mu
+    ) ** (-1 / alpha)
+
+    loglik -= np.log(
+        1 - p0
+    )
+
+    return -np.sum(loglik)
+
+
+# =========================================================
+# Step 9: Fit ZTNB Model
+# =========================================================
+
+init = np.zeros(
+    X.shape[1]
+)
+
+res = minimize(
+
+    ztnb_loglike,
+
+    init,
+
+    args=(y, X),
+
+    method="BFGS"
+
+)
+
+
+# =========================================================
+# Step 10: Display Coefficients
+# =========================================================
+
+print("\nCoefficients:\n")
+
+print(res.x)
+
+
+# =========================================================
+# Step 11: Incidence Rate Ratios (IRR)
+# =========================================================
+
+print(
+    "\nIncidence Rate Ratios (IRR):\n"
+)
+
+print(
+    np.exp(res.x)
+)
+
+\end{lstlisting}
+
+\end{tcolorbox}
+\end{document}
+
+
+
+
+
+
